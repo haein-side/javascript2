@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .area{
+            background: lightgoldenrodyellow; 
+            border : 1px solid black;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <!-- append(): 자바스크립트 메소드 여러개를 허용
+         appendChild(): DOM 메소드 추가는 1개 -->
+    <h1>DOM(Document Object Model)</h1>
+    <h3>텍스트노드가 있는 노드 생성</h3>
+    <button onclick="test1();">실행확인</button>
+    <div id="area1" class="area"></div>
+    <script>
+        function test1(){
+            // element 생성(태그)
+            var title = document.createElement("h3");
+            // 어떤 태그 만들거예요? h3라는 태그 만들거예요
+
+            // textnode 생성
+            var textNode = document.createTextNode("안녕? 난 루피야");
+            // <h3>안녕? 난 뽈로로야<h3>
+
+            // 노드를 연결
+            title.append(textNode);
+            document.getElementById("area1").append(title);
+        }
+    </script>
+
+    <h3>텍스트노드가 없는 노드 생성</h3>
+    <!-- DOM에 있는 객체 - element, 노트 -->
+    <button onclick="test2();">실행확인</button>
+    <div id="area2" class="area"></div>
+    <script>
+        function test2(){
+            // img태그 생성
+            var imgTest = document.createElement("img");
+
+            // 속성 지정
+            imgTest.src = "https://upload3.inven.co.kr/upload/2020/07/25/bbs/i14670415271.jpg";
+            imgTest.width = "150";
+            imgTest.height = "100";
+
+            // 없는 속성 추가(커스터마이징)
+            imgTest.myProperty = "123";
+            // setAttribute()사용
+            imgTest.setAttribute("myProperty", "1234");
+            document.getElementById("area2").appendChild(imgTest);
+
+        }
+    </script>
+
+    <hr>
+
+    <h3>innerHTML</h3>
+    <button onclick="test3();">실행확인</button>
+    <div id="area3" class="area">
+        <table id="board">
+            <tr>
+                <th>글번호</th>
+                <th>글제목</th>
+                <th>작성자</th>
+                <th>조회수</th>
+                <th>작성일자</th>
+            </tr>
+        </table>
+    </div>
+    <script>
+        function test3(){
+            // var board = document.getElementById("board");
+            // alert(board.innerHTML);
+
+            // css선택자를 이용한 방식
+            var board = document.querySelector("#board > tbody");
+            // 테이블 안에 들어가야 하는데, tbody안에 들어가 있으므로
+            // #board를 찾고 그 자식의 tbody라는 요소를 찾아오라는 것 - 그 요소에 맞는 애를 찾아서 board에 넣어줌
+
+            var num = 1;
+            var title = "제목입니다.";
+            var user = "user01";
+            var count = 1;
+            var date = new Date();
+
+            board.innerHTML += "<tr><td>" + num 
+                            + "</td><td>" + title
+                            + "</td><td>" + user
+                            + "</td><td>" + count
+                            + "</td><td>" + date.getFullYear()
+                                          + "-"
+                                          + (date.getMonth() + 1)
+                                          + "-"
+                                          + date.getDate()
+                                          + "</td></tr>";
+        }
+    </script>
+
+    <h3>스타일 지정</h3>
+    <button onclick="test4();">실행확인</button>
+    <div id="area4" class="area"></div>
+    <script>
+        function test4(){
+            var area4 = document.getElementById("area4");
+            area4.style.backgroundColor = "lightgray";
+            area4.style.borderRadius = "50px";
+            area4.style.transition = "all 2s";
+        }
+    </script>
+
+    <h3>노드 삭제</h3>
+    <button onclick="test5();">실행확인</button>
+    <div id="area5" class="area"></div>
+    <script>
+        function test5(){
+            var area5 = document.getElementById("area5");
+
+            area5.remove();
+            //해당 요소 클릭시 remove하면 됨
+        }
+    </script>
+
+
+</body>
+</html>
